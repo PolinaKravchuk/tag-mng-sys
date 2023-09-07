@@ -20,14 +20,9 @@ function Header() {
     <header className="bg-zinc-800 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Image
-            src="next.svg"
-            alt="logo"
-            className="h-8 w-8"
-            width="100"
-            height="50"
-          />
-          <span className="text-white font-semibold text-lg">Tag mng sys</span>
+          <Link href="/" className="text-white font-semibold text-lg">
+            Tag mng sys
+          </Link>
         </div>
         <div className="hidden md:flex space-x-4">
           {pathname !== "/tags" && (
@@ -40,14 +35,6 @@ function Header() {
               </Link>
             </Button>
           )}
-          <Button variant="outline">
-            <Link
-              href="/tags"
-              className="text-white hover:text-zinc-800 transition duration-300"
-            >
-              ...
-            </Link>
-          </Button>
         </div>
         <div className="md:hidden">
           <DropdownMenu>
@@ -72,11 +59,6 @@ function Header() {
                     </Link>
                   </DropdownMenuItem>
                 )}
-                <DropdownMenuItem>
-                  <Link href="/" className="w-full">
-                    ...
-                  </Link>
-                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
