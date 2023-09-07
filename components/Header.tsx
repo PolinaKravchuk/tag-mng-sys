@@ -1,0 +1,89 @@
+"use client";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { RxHamburgerMenu } from "react-icons/rx";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
+
+function Header() {
+  const pathname = usePathname();
+
+  return (
+    <header className="bg-zinc-800 p-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <Image
+            src="next.svg"
+            alt="logo"
+            className="h-8 w-8"
+            width="100"
+            height="50"
+          />
+          <span className="text-white font-semibold text-lg">Tag mng sys</span>
+        </div>
+        <div className="hidden md:flex space-x-4">
+          {pathname !== "/tags" && (
+            <Button variant="outline">
+              <Link
+                href="/tags"
+                className="text-white hover:text-zinc-800 transition duration-300"
+              >
+                Tags
+              </Link>
+            </Button>
+          )}
+          <Button variant="outline">
+            <Link
+              href="/tags"
+              className="text-white hover:text-zinc-800 transition duration-300"
+            >
+              ...
+            </Link>
+          </Button>
+        </div>
+        <div className="md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="text-white hover:text-blue-200 transition duration-300"
+              >
+                <RxHamburgerMenu
+                  color="white"
+                  fontSize="1.5em"
+                  className="w-4 h-4"
+                />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuGroup>
+                {pathname !== "/tags" && (
+                  <DropdownMenuItem>
+                    <Link href="/tags" className="w-full">
+                      Tags
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem>
+                  <Link href="/" className="w-full">
+                    ...
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default Header;
