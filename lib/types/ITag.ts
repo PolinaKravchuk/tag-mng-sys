@@ -1,7 +1,3 @@
-type Variable = {
-  type: string;
-  code: string;
-};
 export default interface ITag {
   id: string;
   name: string;
@@ -11,7 +7,5 @@ export default interface ITag {
     type: string;
     identificatorClass: string;
   };
-  variablesToCollect: Variable[];
   goal: string;
-  icon: string;
 }

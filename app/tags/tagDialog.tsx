@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -87,6 +87,7 @@ function TagDialog({
             </Label>
             <Input
               id="name"
+              data-testid="nameField"
               className="col-span-3"
               {...register("name", {
                 required: true,

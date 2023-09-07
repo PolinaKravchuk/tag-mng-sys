@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { AiFillTag, AiOutlineEdit } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 import ITag from "@/lib/types/ITag";
@@ -39,7 +39,7 @@ function TagsTable({ data }: { data: ITag[] }) {
   };
 
   return (
-    <Table className="w-full">
+    <Table className="w-full" data-testid="table" role="table">
       <TableCaption>A list of all of your tags.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -55,7 +55,7 @@ function TagsTable({ data }: { data: ITag[] }) {
       </TableHeader>
       <TableBody>
         {tags.map((tag) => (
-          <TableRow key={tag.id}>
+          <TableRow key={tag.id} data-testid="row">
             <TableCell>
               <AiFillTag className="w-4 h-4" />
             </TableCell>
