@@ -1,7 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { AiFillTag } from "react-icons/ai";
+import React, { useEffect } from "react";
+import { AiFillTag, AiOutlineEdit } from "react-icons/ai";
+import { RiDeleteBinLine } from "react-icons/ri";
+import ITag from "@/lib/types/ITag";
+import { useTagContext } from "@/lib/TagProvider";
 import {
   Table,
   TableBody,
@@ -11,30 +13,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-type Variable = {
-  type: string;
-  code: string;
-};
-interface ITag {
-  id: string;
-  createdAt: Date;
-  name: string;
-  description: string;
-  type: string;
-  triggerRule: {
-    type: string;
-    identificatorClass: string;
-  };
-  variablesToCollect: Variable[];
-  goal: string;
-  icon: string;
-}
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import TagDialog from "./tagDialog";
 
 function TagsTable({ data }: { data: ITag[] }) {
-  const [tags, setTags] = useState<ITag[]>(data);
+  const { tags, updateTags, updateCurrentTag } = useTagContext();
+
+  useEffect(() => {
+    updateTags(data);
+  }, [data]);
+
+  const handleDeleteTag = (id: string) => {
+    updateTags(tags.filter((tag) => tag.id !== id));
+  };
+
   return (
-    <Table>
+    <Table className="w-full">
       <TableCaption>A list of all of your tags.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -44,6 +49,8 @@ function TagsTable({ data }: { data: ITag[] }) {
           <TableHead>Type</TableHead>
           <TableHead className="text-right">Trigger</TableHead>
           <TableHead className="text-right">Goal</TableHead>
+          <TableHead></TableHead>
+          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -56,10 +63,21 @@ function TagsTable({ data }: { data: ITag[] }) {
             <TableCell>{tag.description}</TableCell>
             <TableCell>{tag.type}</TableCell>
             <TableCell className="text-right">
-              type - {tag.triggerRule.type}, class -{" "}
-              {tag.triggerRule.identificatorClass}
+              {tag.triggerRule.type && `type: ${tag.triggerRule.type}`}
+              {tag.triggerRule.identificatorClass &&
+                `class: ${tag.triggerRule.identificatorClass}`}
             </TableCell>
-            <TableCell>{tag.goal}</TableCell>
+            <TableCell className="font-small">{tag.goal}</TableCell>
+            <TableCell>
+              <TagDialog type="edit">
+                <Button variant="outline" onClick={() => updateCurrentTag(tag)}>
+                  <AiOutlineEdit className="w-4 h-4" />
+                </Button>
+              </TagDialog>
+            </TableCell>
+            <TableCell>
+              <DeleteAlert onDelete={() => handleDeleteTag(tag.id)} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -68,3 +86,29 @@ function TagsTable({ data }: { data: ITag[] }) {
 }
 
 export default TagsTable;
+
+const DeleteAlert = function ({ onDelete }: { onDelete: () => void }) {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">
+          <RiDeleteBinLine className="w-4 h-4" />
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your tag.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={() => onDelete()}>
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};

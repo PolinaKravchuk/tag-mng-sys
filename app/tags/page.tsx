@@ -1,9 +1,10 @@
-import Header from "@/components/Header";
 import React from "react";
-import TagsTable from "./tagsTable";
 import PageWrapper from "@/components/PageWrapper";
-import TableToolbar from "./tableToolbar";
-const API_URL = "https://64f984374098a7f2fc148997.mockapi.io/api/v1/";
+import { Button } from "@/components/ui/button";
+import { API_URL } from "@/lib/constants";
+import TagDialog from "./tagDialog";
+import TagsTable from "./tagsTable";
+import { AiFillTag } from "react-icons/ai";
 
 async function getTags() {
   const response = await fetch(API_URL + "tags", {
@@ -16,9 +17,18 @@ export default async function TagsPage() {
 
   return (
     <PageWrapper>
-      <section className="">
-        <TableToolbar />
-        <TagsTable data={tags} />
+      <section className="w-full">
+        <div className="flex justify-end items-end">
+          <TagDialog type="add">
+            <Button variant="outline">
+              <AiFillTag className="w-4 h-4 mr-2" />
+              Add new
+            </Button>
+          </TagDialog>
+        </div>
+        <div className="w-full">
+          <TagsTable data={tags} />
+        </div>
       </section>
     </PageWrapper>
   );
