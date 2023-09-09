@@ -38,6 +38,8 @@ export const TagProvider: React.FC<PropsWithChildren> = (props) => {
   };
 
   const updateTags = (data: ITag[]) => {
+    console.log("!!!!! updateTags !!!!!", data);
+
     setTags(data);
   };
 

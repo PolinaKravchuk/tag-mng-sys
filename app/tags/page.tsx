@@ -17,7 +17,7 @@ export default async function TagsPage() {
 
   return (
     <PageWrapper>
-      <TagsView tags={tags} />
+      <TagsView data={tags} />
       {/* <section className="w-full">
         <div className="flex justify-end items-end">
           <TagDialog type="add">
