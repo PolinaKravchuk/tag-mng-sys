@@ -4,6 +4,6 @@ import Home from "@/app/page";
 
 test("renders 'Welcome' message", () => {
   render(<Home />);
-  const element = screen.getByRole("welcome");
+  const element = screen.getByRole("heading");
   expect(element).toBeInTheDocument();
 });

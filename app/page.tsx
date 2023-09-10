@@ -1,13 +1,11 @@
 import PageWrapper from "@/components/PageWrapper";
 import Link from "next/link";
+
 export default function Home() {
   return (
     <PageWrapper>
-      <section
-        className="w-full flex flex-col justify-center items-center"
-        role="welcome"
-      >
-        <h1 className="text-xl" data-testid="welcomTitle">
+      <section className="w-full flex flex-col justify-center items-center">
+        <h1 className="text-xl" data-testid="welcomTitle" role="heading">
           Hello Move team!
         </h1>{" "}
         <p>Welcome to this simple Tag management system</p>
