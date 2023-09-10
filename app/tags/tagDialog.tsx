@@ -61,8 +61,6 @@ function TagDialog({
       editTag(tagData as ITag);
     }
     setOpen(false);
-
-    console.log(getValues());
   };
   const onOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
@@ -81,8 +79,13 @@ function TagDialog({
         </DialogHeader>
 
         <div className="grid gap-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-left">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
+            <Label
+              htmlFor="name"
+              className="text-left"
+              aria-label="tag name"
+              aria-required="true"
+            >
               Name
             </Label>
             <Input
@@ -99,8 +102,13 @@ function TagDialog({
               This field is required
             </span>
           )}
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="description" className="text-left">
+
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
+            <Label
+              htmlFor="description"
+              className="text-left"
+              aria-label="tag description"
+            >
               Description
             </Label>
             <Input
@@ -109,14 +117,18 @@ function TagDialog({
               {...register("description")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="type" className="text-left">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
+            <Label htmlFor="type" className="text-left" aria-label="tag type">
               Type
             </Label>
             <Input id="type" className="col-span-3" {...register("type")} />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="triggerType" className="text-left">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
+            <Label
+              htmlFor="triggerType"
+              className="text-left"
+              aria-label="trigger type"
+            >
               Trigger type
             </Label>
             <Input
@@ -124,7 +136,11 @@ function TagDialog({
               className="col-span-3"
               {...register("triggerRule.type")}
             />
-            <Label htmlFor="triggerClass" className="text-left">
+            <Label
+              htmlFor="triggerClass"
+              className="text-left"
+              aria-label="trigger identificator"
+            >
               Identificator class
             </Label>
             <Input
@@ -133,8 +149,8 @@ function TagDialog({
               {...register("triggerRule.identificatorClass")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="goal" className="text-left">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
+            <Label htmlFor="goal" className="text-left" aria-label="goal">
               Goal
             </Label>
             <Input id="goal" className="col-span-3" {...register("goal")} />
@@ -144,7 +160,11 @@ function TagDialog({
         </div>
 
         <DialogFooter>
-          <Button type="submit" onClick={handleSubmit(onSubmit)}>
+          <Button
+            type="submit"
+            onClick={handleSubmit(onSubmit)}
+            data-testid="submitBtn"
+          >
             Save
           </Button>
         </DialogFooter>
