@@ -59,11 +59,12 @@ function TagsTable() {
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
+
         <TableBody>
           {portion.map((tag) => (
             <TableRow key={tag.id} data-testid="row">
               <TableCell>
-                <AiFillTag className="w-4 h-4" />
+                <AiFillTag className="w-4 h-4" aria-hidden="true" />
               </TableCell>
               <TableCell className="font-medium" data-testid="name">
                 {tag.name}

@@ -79,7 +79,7 @@ function TagDialog({
         </DialogHeader>
 
         <div className="grid gap-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
             <Label
               htmlFor="name"
               className="text-left"
@@ -102,7 +102,8 @@ function TagDialog({
               This field is required
             </span>
           )}
-          <div className="grid grid-cols-4 items-center gap-4">
+
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
             <Label
               htmlFor="description"
               className="text-left"
@@ -116,13 +117,13 @@ function TagDialog({
               {...register("description")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
             <Label htmlFor="type" className="text-left" aria-label="tag type">
               Type
             </Label>
             <Input id="type" className="col-span-3" {...register("type")} />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
             <Label
               htmlFor="triggerType"
               className="text-left"
@@ -148,7 +149,7 @@ function TagDialog({
               {...register("triggerRule.identificatorClass")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 items-center gap-4" role="group">
             <Label htmlFor="goal" className="text-left" aria-label="goal">
               Goal
             </Label>
