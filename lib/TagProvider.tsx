@@ -6,7 +6,6 @@ import React, {
   useState,
 } from "react";
 import ITag from "./types/ITag";
-import { API_URL } from "./constants";
 import { useToast } from "@/components/ui/use-toast";
 
 interface ITagContext {
@@ -38,8 +37,6 @@ export const TagProvider: React.FC<PropsWithChildren> = (props) => {
   };
 
   const updateTags = (data: ITag[]) => {
-    console.log("!!!!! updateTags !!!!!", data);
-
     setTags(data);
   };
 

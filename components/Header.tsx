@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import styled from "@emotion/styled";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import {
@@ -17,7 +17,7 @@ function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-zinc-800 p-4">
+    <NewHeader>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Link href="/" className="text-white font-semibold text-lg">
@@ -64,8 +64,13 @@ function Header() {
           </DropdownMenu>
         </div>
       </div>
-    </header>
+    </NewHeader>
   );
 }
 
 export default Header;
+
+const NewHeader = styled.header`
+  background-color: #014;
+  padding: 16px;
+`;

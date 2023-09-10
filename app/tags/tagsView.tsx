@@ -6,6 +6,17 @@ import { Button } from "@/components/ui/button";
 import { AiFillTag } from "react-icons/ai";
 import TagsTable from "./tagsTable";
 import { useTagContext } from "@/lib/TagProvider";
+import styled from "@emotion/styled";
+
+type HeadingProps = {
+  regular: boolean;
+};
+
+const Heading = styled.h1<HeadingProps>`
+  color: white;
+  font-size: 24px;
+  font-weight: ${(props) => (props.regular ? "100" : "700")};
+`;
 
 function TagsView({ data }: { data: ITag[] }) {
   const { tags, updateTags } = useTagContext();
@@ -16,6 +27,7 @@ function TagsView({ data }: { data: ITag[] }) {
 
   return (
     <section className="w-full">
+      <Heading regular>Tags view</Heading>
       <div className="flex justify-end items-end">
         <TagDialog type="add">
           <Button variant="outline" data-testid="addBtn">
